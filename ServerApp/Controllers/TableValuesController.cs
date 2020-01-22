@@ -14,10 +14,8 @@ namespace ServerApp.Controllers
     public class TableValuesController : Controller
     {
         private DataContext context;
-        private static ILogger<TableValuesController> logger;
-        public TableValuesController(DataContext context, ILogger<TableValuesController> log)
+        public TableValuesController(DataContext context)
         {
-            logger = log;
             this.context = context;
         }
 
