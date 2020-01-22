@@ -28,7 +28,6 @@ namespace ServerApp.Controllers
             ExcelWriter.Create(pathToOrigin, name);
             string pathToNew = $"{pathToOrigin}\\tempFiles\\{name}";
             ExcelWriter.SeedExcel(pathToNew, table.InvalidRows);
-            var memory = new MemoryStream();
 
             byte[] fileBytes = System.IO.File.ReadAllBytes(pathToNew);
 
