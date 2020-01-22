@@ -1,0 +1,23 @@
+<table class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let cell of table.header">
+        {{cell.content || loading}}
+        </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of table.invalidRows">
+      <th *ngFor="let cell of row.cells">
+        {{cell.content}}
+        <th><input type="checkbox" name="isSelected" [checked]="row.isSelected" (change)="row.isSelected = !row.isSelected" /></th>
+    </tr>
+  </tbody>
+</table>`
+<div *ngIf="table.invalidRows.length == 0">
+  No invalid rows
+</div>
+<button class="btn btn-primary m-1" (click)="download()">
+  Download
+</button>
+

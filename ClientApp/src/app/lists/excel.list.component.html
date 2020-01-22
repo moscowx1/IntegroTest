@@ -1,0 +1,19 @@
+<div class="p-2">
+  <table class="table table-sm table-striped">
+    <tbody>
+      <tr>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Selected</th>
+      </tr>
+      <tr *ngFor="let excel of excelFiles">
+        <th>{{excel.excelId}}</th>
+        <th>{{excel.name}}</th>
+        <th><input type="radio" name="choose" (click)="select(excel.excelId)" /></th>
+      </tr>
+    </tbody>
+  </table>
+  <button *ngIf="selected >= 0" class="btn btn-primary m-1" (click)="redirect()">
+    Show Invalid Rows
+  </button>
+</div>
