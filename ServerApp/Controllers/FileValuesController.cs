@@ -13,7 +13,7 @@ namespace ServerApp.Controllers
     public class FileValuesController : Controller
     {
         private DataContext context;
-        public FileValuesController(DataContext ctx, ILogger<FileValuesController> log)
+        public FileValuesController(DataContext ctx)
         {
             context = ctx;
         }
@@ -29,10 +29,7 @@ namespace ServerApp.Controllers
             string pathToNew = $"{pathToOrigin}\\tempFiles\\{name}";
             ExcelWriter.SeedExcel(pathToNew, table.InvalidRows);
             var memory = new MemoryStream();
-            using (var stream = new FileStream(pathToNew, FileMode.Open))
-            {
-                stream.CopyToAsync(memory);
-            }
+
             byte[] fileBytes = System.IO.File.ReadAllBytes(pathToNew);
 
             ExcelWriter.Delete(pathToNew);
