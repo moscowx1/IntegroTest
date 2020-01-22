@@ -22,20 +22,16 @@ namespace ServerApp.Controllers
         {
             Table table = tData.Table;
 
-            string name = context.Excels.First(e => e.ExcelId == table.ExcelId).Name;
+            //string name = context.Excels.First(e => e.ExcelId == table.ExcelId).Name;
+            var excel = context.Excels.First(e => e.ExcelId == table.ExcelId);
+            //string pathToOrigin = Path.Combine(Directory.GetCurrentDirectory(), "ExcelFiles");
+            //ExcelWriter.Create(pathToOrigin, name);
+            //string pathToNew = $"{pathToOrigin}\\tempFiles\\{name}";
+            //ExcelWriter.SeedExcel(pathToNew, table.InvalidRows);
+            //byte[] fileBytes = System.IO.File.ReadAllBytes(pathToNew);
 
-            string pathToOrigin = Path.Combine(Directory.GetCurrentDirectory(), "ExcelFiles");
-            ExcelWriter.Create(pathToOrigin, name);
-            string pathToNew = $"{pathToOrigin}\\tempFiles\\{name}";
-            ExcelWriter.SeedExcel(pathToNew, table.InvalidRows);
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(pathToNew, FileMode.Open))
-            {
-                stream.CopyToAsync(memory);
-            }
-            byte[] fileBytes = System.IO.File.ReadAllBytes(pathToNew);
-
-            ExcelWriter.Delete(pathToNew);
+            //ExcelWriter.Delete(pathToNew);
+            byte[] fileBytes = ExcelWriter.GetExcel(excel.Path, excel.Name, table.InvalidRows);
             const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
             return File(fileBytes, contentType);
